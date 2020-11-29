@@ -1,6 +1,6 @@
 import { socket } from 'zeromq/v5-compat'
 import { BitcoinTx } from './BitcoinTx'
-import { Pool } from './AddressPool'
+import { Pool } from './Pool'
 import { SQSSender, SQS_QUEUES } from './AWS'
 import { BitcoinBlock } from './BitcoinBlock'
 

@@ -1,11 +1,7 @@
+import { Pool } from './Pool'
 import { SQSConsumer, SQS_QUEUES } from './AWS'
 
-export class Pool {
-    static addresses: Set<string> = new Set()
-    static unconfirmedTxs: Map<string, string> = new Map()
-}
-
-export class AddressPoolListener {
+export class AddressListener {
     static listen() {
         new SQSConsumer(SQS_QUEUES.LISTEN_ADDRESS, async message => {
             if (message?.Body) {

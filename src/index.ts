@@ -1,5 +1,5 @@
-import { AddressPoolListener } from './AddressPool'
+import { AddressListener } from './AddressListener'
 import { BitcoinStreamer } from './BitcoinStreamer'
 
-AddressPoolListener.listen()
+AddressListener.listen()
 new BitcoinStreamer().listen()

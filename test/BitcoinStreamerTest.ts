@@ -1,4 +1,4 @@
-import { Pool } from '../src/AddressPool'
+import { Pool } from '../src/Pool'
 import { BitcoinStreamer } from '../src/BitcoinStreamer'
 import { sampleBlock, sampleTx } from './BitcoinData'
 import { mock, instance } from 'ts-mockito'
