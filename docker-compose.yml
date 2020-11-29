@@ -1,0 +1,28 @@
+version: '3.1'
+services:
+    streamer:
+        image: node:13.7.0-alpine3.11
+        command: sh -c "npm i && npm run dev"
+        working_dir: /srv
+        environment:
+            ZMQ_ADDR: tcp://bitcoin_node:3600
+        volumes:
+            - .:/srv
+            - /srv/node_modules
+        depends_on:
+            - bitcoin_node
+        secrets:
+            - aws_secret
+
+    bitcoin_node:
+        image: ruimarinho/bitcoin-core:0.20-alpine
+        command: -zmqpubrawtx=tcp://0.0.0.0:3600 -zmqpubrawblock=tcp://0.0.0.0:3600 -testnet -prune=550
+        volumes:
+            - bitcoin-data:/home/bitcoin/.bitcoin
+
+volumes:
+    bitcoin-data:
+
+secrets:
+    aws_secret:
+        external: true

@@ -1,0 +1,39 @@
+{
+    "name": "blockchain-streamer",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "docker:dev": "docker stack deploy --compose-file=docker-compose.yml bitcoin",
+        "docker:stop": "docker stack rm bitcoin",
+        "docker:stop:bitcoind": "docker ps | grep bitcoin_node | cut -d' ' -f1 - | xargs -o -I {} docker exec --user bitcoin -it {} bitcoin-cli -testnet stop",
+        "docker:log:streamer": "docker ps | grep streamer | cut -d' ' -f1 - | xargs docker logs -f",
+        "docker:log:bitcoin": "docker ps | grep bitcoin_node | cut -d' ' -f1 - | xargs docker logs -f",
+        "docker:ssh:bitcoin": "docker ps | grep bitcoin_node | cut -d' ' -f1 - | xargs -o -I {} docker exec --user bitcoin -it {} sh",
+        "docker:ssh:streamer": "docker ps | grep streamer | cut -d' ' -f1 - | xargs -o -I {} docker exec -it {} sh",
+        "build": "npm run clean && tsc",
+        "dev": "npm run clean && tsc-watch --onSuccess \"node dist/src\"",
+        "clean": "rimraf dist",
+        "test": "jest"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "bitcoin-units": "^0.3.0",
+        "bitcoinjs-lib": "^5.2.0",
+        "typescript": "^4.1.2",
+        "zeromq": "^6.0.0-beta.6"
+    },
+    "devDependencies": {
+        "@types/bitcoinjs-lib": "^5.0.0",
+        "@types/jest": "^26.0.15",
+        "@types/node": "^14.14.9",
+        "jest": "^26.6.3",
+        "rimraf": "^3.0.2",
+        "ts-jest": "^26.4.4",
+        "tsc-watch": "^4.2.9",
+        "aws-sdk": "^2.797.0",
+        "sqs-consumer": "^5.5.0",
+        "ts-mockito": "2.6.1"
+    }
+}
